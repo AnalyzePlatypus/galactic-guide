@@ -16,6 +16,25 @@ DOWNLOAD_QUEUE_FILE = PROJECT_ROOT + "/tmp/queue.txt"
 
 LINK_SELECTOR = "span.field-content>a"
 
+# Helper functions
+
+def set_working_dir dir
+  FileUtils.cd dir
+end
+
+def create_parent_directories_of 
+  FileUtils.mkdir_p(File.dirname(path))
+end
+
+def clear_queue_if_exists 
+  if File.exist? DOWNLOAD_QUEUE_FILE
+    puts "❗️  Found existing download queue (#{DOWNLOAD_QUEUE_FILE})".red
+    puts "❗️  Deleting queue".red
+    File.delete DOWNLOAD_QUEUE_FILE
+    puts "✅  Done\n".green
+  end
+end
+
 def enqueue_links_from_index_file index_file_path
   html = File.read index_file_path
   doc = Nokogiri::HTML(html)
@@ -29,7 +48,6 @@ def enqueue_links_from_index_file index_file_path
   puts "\tEnqueued ".green + "#{rows.count}".magenta + " articles".green
 end
 
-
 def enqueue_url url
   File.open DOWNLOAD_QUEUE_FILE, "a+" do |f|
     download_file_path = DOWNLOAD_FOLDER_PATH + url.split("/")[-1]
@@ -41,17 +59,11 @@ end
 # Runtime
 
 puts "\ncreate_download_queue ".green + "v#{SCRIPT_VERSION}\n".yellow
-
 puts "🌀  Setting up...".blue
-FileUtils.cd PROJECT_ROOT
-FileUtils.mkdir_p(File.dirname(DOWNLOAD_QUEUE_FILE))
 
-if File.exist? DOWNLOAD_QUEUE_FILE
-  puts "❗️  Found existing download queue (#{DOWNLOAD_QUEUE_FILE})".red
-  puts "❗️  Deleting queue".red
-  File.delete DOWNLOAD_QUEUE_FILE
-  puts "✅  Done\n".green
-end
+set_working_dir PROJECT_ROOT
+create_parent_directories_of DOWNLOAD_QUEUE_FILE
+clear_queue_if_exists
 
 puts "🌀  Looking for index files in ".yellow + INDEX_FILE_DIRECTORY.magenta
 

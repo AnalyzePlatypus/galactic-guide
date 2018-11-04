@@ -57,10 +57,6 @@ SELECTORS = [
   {
     selector: "#date",
     title: "article_date"
-  },
-  {
-   selector: ".c5:nth-of-type(2)",
-   title: "article"
   }
 ]
 
@@ -71,6 +67,7 @@ class ArticleParser
     @doc = Nokogiri::HTML(html)
 
     article = parse_selectors
+    article["article_body"] = article["article_body"].gsub("\n", "\n\n") 
     article["footnotes"] = parse_footnotes
     article["see_also"] = parse_see_also
 
@@ -88,16 +85,23 @@ class ArticleParser
     article
   end
 
+  def self.parse_body 
+    body_selector =  ".c5:nth-of-type(2)",
+    title = "article_body"
+  }
+  end
+
   def self.parse_footnotes
     footnote_table = @doc.css ".c5>table"
     return [] if footnote_table.nil?
     rows =  @doc.css ".c5>table tr"
-    rows.map do |row|
-      {
-        number: row.css("td:first-of-type>a").text,
-        text: row.css("td:nth-of-type(2)").text
-      }
+    footnotes = {}
+    rows.each do |row|
+      number = row.css("td:first-of-type>a").text
+      content = row.css("td:nth-of-type(2)").text
+      footnotes[number] = content
     end
+    footnotes
   end
   
   def self.parse_see_also
@@ -110,7 +114,7 @@ class ArticleParser
   end
 end
 
-html = File.read FILE_PATH
-ap ArticleParser.parse html
+# html = File.read FILE_PATH
+# ap ArticleParser.parse html
 
 

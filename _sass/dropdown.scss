@@ -1,0 +1,34 @@
+
+li.has-dropdown {
+  position: relative;
+}
+
+.dropdown-wrapper {
+  top: 40px;
+  width: 170px;
+  visibility: hidden;
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid lightgray;
+  box-shadow: 1px 1px 3px lightgray;
+  transition: $transition-standard;
+}
+
+.dropdown-wrapper.visible {
+  visibility: visible;
+}
+
+.dropdown-wrapper ul {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  list-style: none;
+}
+
+.dropdown-wrapper .nav-link {
+  padding: 4px 0px 4px 4px;
+}
+
+.dropdown-wrapper .nav-link::after {
+  content: '';
+}

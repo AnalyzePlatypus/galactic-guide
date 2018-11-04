@@ -41,11 +41,11 @@ ignore_file_count = File.
 
 puts "ℹ️  Ignoring ".yellow + "#{ignore_file_count}".red + " exclude files".yellow
 
-selected_files = html_files[0..100]
+selected_files = html_files
 
 start_t = Time.now
 
-selected_files.each_with_index do |html_file_path|
+selected_files.each_with_index do |html_file_path, i|
   puts "🌀 Generating Jekyll article [".blue + "#{i + 1}".green + "/#{selected_files.count}]".blue
   begin
     html = File.read html_file_path

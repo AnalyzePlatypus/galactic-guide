@@ -1,12 +1,6 @@
-#!/usr/bin/env ruby
-
-require 'colorize'
-require 'awesome_print'
 require 'json'
 
-require_relative "article_parser"
-
-class MarkdownGenerator
+class JekyllArticleGenerator
   
   def self.generate article_data
     document = <<-EOT
@@ -31,15 +25,3 @@ footnotes: #{article_data['footnotes'].to_json}
     EOT
   end
 end
-
-FILE_PATH = "recovered_content/articles/9S9.html"
-html = File.read FILE_PATH
-article =  ArticleParser.parse html
-ap article
-markdown = MarkdownGenerator.generate article
-
-File.open 'test.md', 'w' do |f|
-  f.puts markdown
-end
-
-ap markdown

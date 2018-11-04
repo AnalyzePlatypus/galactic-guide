@@ -1,13 +1,8 @@
 #!/usr/bin/env ruby
 
-require 'colorize'
-require 'awesome_print'
-require 'json'
 require 'nokogiri'
 
-USEFUL_EMOJI = "✅ 🌀❗️❓ 📡 💾 ℹ️"
-
-FILE_PATH = "recovered_content/articles/9S9.html"
+require_relative 'article_sanitizer.rb'
 
 SELECTORS = [
   {
@@ -61,13 +56,12 @@ SELECTORS = [
 ]
 
 
-
 class ArticleParser
   def self.parse html
     @doc = Nokogiri::HTML(html)
 
     article = parse_selectors
-    article["article_body"] = article["article_body"].gsub("\n", "\n\n") 
+    article["article_body"] = parse_body
     article["footnotes"] = parse_footnotes
     article["see_also"] = parse_see_also
 
@@ -86,9 +80,9 @@ class ArticleParser
   end
 
   def self.parse_body 
-    body_selector =  ".c5:nth-of-type(2)",
-    title = "article_body"
-  }
+    body_selector =  ".c5:nth-of-type(2)"
+    article_doc = @doc.css(body_selector)
+    ArticleSanitizer.sanitize(article_doc).to_html
   end
 
   def self.parse_footnotes
@@ -113,8 +107,3 @@ class ArticleParser
     end
   end
 end
-
-# html = File.read FILE_PATH
-# ap ArticleParser.parse html
-
-

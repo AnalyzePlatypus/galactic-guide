@@ -1,7 +1,7 @@
 #! /usr/bin/env ruby
 
 require 'colorize'
-require_relative 'filequeue.rb'
+require_relative 'helper_classes/filequeue'
 
 QUEUE_FILE = 'tmp/queue.txt'
 

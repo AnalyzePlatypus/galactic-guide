@@ -1,4 +1,4 @@
-require "json"
+require 'yaml'
 
 class JekyllArticleGenerator
   
@@ -19,10 +19,25 @@ alternative_title_2: "#{article_data["alternative_index_2"]}"
 alternative_title_3: "#{article_data["alternative_index_3"]}"
 alternative_title_4: "#{article_data["alternative_index_4"]}"
 submission_string: "#{article_data["submission_string"]}"
-see_also: #{article_data["see_also"]}
-footnotes: #{article_data["footnotes"].to_json}
+see_also:\n#{array_to_yaml article_data["see_also"] || []}
+footnotes: \n#{hash_to_yaml article_data["footnotes"] || {}}
 ---
 #{article_data["article_body"]}
-    EOT
+EOT
   end
+
+
 end
+
+def array_to_yaml array
+  array.map {|item| "  - #{item}"}.join("\n")
+end
+
+def hash_to_yaml hash
+  yaml = ""
+  hash.each do |k,v|
+    yaml += "  - #{k}:\n    number: #{k}\n    text: \"#{v}\"\n"
+  end
+  yaml
+end
+

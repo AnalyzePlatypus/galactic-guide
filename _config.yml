@@ -1,4 +1,23 @@
+title: Project Galactic Guide
+title_separator: "|"
+description: "The entirely unreliable guide to the universe, based on the Hitchhiker's Guide to the Galaxy, by Douglas Adams"
 theme: minima
 collections:
   articles:
+    output: true
     collections_dir: articles
+
+defaults:
+  # _posts
+  - scope:
+      path: "articles"
+      type: posts
+    values:
+      read_time: true
+
+exclude:
+  - build_scripts
+  - recovered_content
+  - readme.md
+  - using_the_tools.md
+  - tmp

@@ -6,43 +6,15 @@
   <div class="nav-links desktop">
     <ul>
         {% for item in site.data.navigation %}
-        <li {% if item.children %} class="has-dropdown" data-has-dropdown=true {% endif %}>
-          {% if item.children %}
-          <a href="{{ item.link }}"
-            {% if item.id %}
-              id="{{ item.id }}"
-            {% endif %}
+        <li>
+            <a href="{{ item.url }}"
             {% if page.url == item.link + ".html" %} 
               class="nav-link current"
             {% endif %}
               class="nav-link"
             >
-            {{ item.name}}
+            {{ item.title}}
             </a>
-            <div class="dropdown-wrapper">
-              <ul>
-                {% for child_item in item.children %}
-                <li>
-                    <a href="{{ child_item.link }}" class="nav-link">
-                    {{ child_item.name}}
-                    </a>
-                </li>
-                {% endfor %}
-              </ul>
-            </div>
-          {% else %}
-            <a href="{{ item.link }}"
-            {% if item.id %}
-              id="{{ item.id }}"
-            {% endif %}
-            {% if page.url == item.link + ".html" %} 
-              class="nav-link current"
-            {% endif %}
-              class="nav-link"
-            >
-            {{ item.name}}
-            </a>
-          {% endif %}
           <!-- <div class="delimiter">/</div> -->
         </li>
         {% endfor %}

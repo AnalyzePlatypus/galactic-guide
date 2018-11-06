@@ -1,0 +1,22 @@
+---
+layout: default
+title: All Articles
+---
+
+<ul>
+  
+  {% for article in site.articles %}
+    <li>
+      <a href="{{ article.permalink }}">
+          <h5>{{ article.title }}</h5>
+          <small>{{ article.subtitle }}</small>
+          
+      </a>
+      <div>
+        <a href="">
+            {{ article.factuality }}
+        </a>
+      </div>
+    </li>
+  {% endfor %}
+</ul>

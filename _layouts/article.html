@@ -9,6 +9,55 @@
   </head>
   <body>
     {% include navigation.html %}
-    {{ content }}
+    <h1>
+      <a href="{{page.pgg_id}}">
+          {{ page.title }}
+      </a>
+    </h1>
+    <h2>{{ page.subtitle }}</h2>
+    <h3>by {{ page.author }}</h3>
+    <h3><small>{{ page.pgg_date }}</small></h3>
+    <div>
+      <div>{{ page.factuality }}</div>
+    </div>
+
+    <section>
+      {{ content }}
+    </section>
+
+    {% if page.see_also %}
+    <section id="see-also">
+      <h2>See also</h2>
+      <ul>
+        {% for reference_id in page.see_also %}
+          <li>
+            <a href="{{reference_id}}">
+                {{ reference_id }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    {% if page.footnotes %}
+    <section id="footnotes">
+      <h2>Footnotes</h2>
+      <ul>
+        {% for footnote in page.footnotes %}
+        <li value="{{footnote.number}}">
+          <a href="#footnote-link.{{footnote.number}}" name="footnote-body.{{footnote.number}}">
+            {{footnote.number}}
+          </a>
+          {{footnote.text}}
+        </li>
+        {% endfor %}</li>
+      </ul>
+    </section>
+    {% endif %}
+
+    <section>
+        <h6>{{ page.submission_string }}</h6>
+    </section>
   </body>
 </html>

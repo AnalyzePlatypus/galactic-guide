@@ -56,10 +56,12 @@ SELECTORS = [
   }
 ]
 
-
 class ArticleParser
+  def initialize
+    @coder = HTMLEntities.new
+  end
 
-  def self.parse html
+  def parse html
     @doc = Nokogiri::HTML(html)
 
     article = parse_selectors
@@ -72,8 +74,7 @@ class ArticleParser
 
   private
 
-  def self.parse_selectors
-    @coder = HTMLEntities.new
+  def parse_selectors
     article = {}
     SELECTORS.each do |field|
       value = @doc.css(field[:selector]).text
@@ -83,26 +84,26 @@ class ArticleParser
     article
   end
 
-  def self.parse_body 
+  def parse_body 
     body_selector =  ".c5:nth-of-type(2)"
     article_doc = @doc.css(body_selector)
     ArticleSanitizer.sanitize(article_doc).to_html
   end
 
-  def self.parse_footnotes
+  def parse_footnotes
     footnote_table = @doc.css ".c5>table"
     return [] if footnote_table.nil?
     rows =  @doc.css ".c5>table tr"
     footnotes = {}
     rows.each do |row|
-      number = row.css("td:first-of-type>a").text
-      content = row.css("td:nth-of-type(2)").text
-      footnotes[number] = content
+      number = row.css("td:first-of-type>a").text.gsub(/[\[\]]/, '') # Remove [] characters from around the footnote number
+      text = row.css("td:nth-of-type(2)").text.gsub("\n", "") # Remove newlines from the footnote. This makes laying them out in indentaion-sensitive YAML (Jekyll Front Matter) much easier.
+      footnotes[number] = @coder.encode text
     end
     footnotes
   end
   
-  def self.parse_see_also
+  def parse_see_also
     see_also_container = @doc.css ".c5>ul"
     return [] if see_also_container.nil?
     items = @doc.css ".c5>ul #pggxref"

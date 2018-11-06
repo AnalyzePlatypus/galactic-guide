@@ -2,6 +2,15 @@
 $global-font: "Avenir", "Helvetica", sans-serif;
 $nav-link-font-size: 12px;
 
+$font-size-standard: 14px;
+$font-size-superscript: 12px;
+
 * {
   font-family: $global-font;
+}
+
+.footnote-link {
+  font-size: $font-size-superscript;
+  font-weight: bold;
+  text-decoration: none;
 }

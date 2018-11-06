@@ -1,6 +1,10 @@
 class ArticleSanitizer
   def self.sanitize nokogiri_elem
-    [:cleanup_article, :cleanup_ol, :cleanup_footnote_links, :cleanup_heading_anchors].each do |method_sym|
+    [:cleanup_article, 
+     :cleanup_ol, 
+     :configure_footnote_links, 
+     :cleanup_heading_anchors
+    ].each do |method_sym|
       method = self.method method_sym
       method.call nokogiri_elem
     end
@@ -9,27 +13,32 @@ class ArticleSanitizer
 
   private
 
+  # Remove some noisy markup from the article wrapper <div>
   def self.cleanup_article nokogiri_article_object
     nokogiri_article_object.css(".c5").remove_class "c5"
-    cleanup_ol nokogiri_article_object
-    cleanup_footnote_links nokogiri_article_object
-    nokogiri_article_object
   end
 
+  # Strip some noisy markup from any <ol> lists that may be present
   def self.cleanup_ol nokogiri_elem
     ol_elems = nokogiri_elem.css("ol")
     ol_elems.remove_attr "type" unless ol_elems.nil?
     nokogiri_elem
   end
 
-  def self.cleanup_footnote_links nokogiri_elem
+  # Add the links that power jumping to the footnotes
+  def self.configure_footnote_links nokogiri_elem
     hash_link_elems = nokogiri_elem.css "a[href^='#']"
-    hash_link_elems.remove_attr "name"
-    hash_link_elems.add_class "footnote-link"
+
     hash_link_elems.each do |link_elem|
-      footnote_number = link_elem.text.gsub /\[|\]/, ""
-      link_url = "#footnotes.#{footnote_number}"
-      link_elem["href"] = link_url
+      footnote_number = remove_brackets(link_elem.text)
+
+      corresponding_footnote_url = "#footnote-body.#{footnote_number}" # This points to the anchor in the corresponding footnote. (The footnote generates the landing anchor for this link indepenently, in the 'article' layout)
+      self_url = "footnote-link.#{footnote_number}" # This will be pointed to by the footnote itself
+
+      link_elem["href"] = corresponding_footnote_url
+      link_elem["name"] = self_url
+      
+      link_elem.add_class "footnote-link"
     end
     nokogiri_elem
   end
@@ -50,4 +59,7 @@ class ArticleSanitizer
     nokogiri_elem
   end
 
+  def self.remove_brackets str
+    str.gsub /\[|\]/, ""
+  end
 end

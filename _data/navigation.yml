@@ -1,0 +1,12 @@
+---
+- title: home
+  url: /
+- title: all
+  url: /all
+- title: semireal
+  url: /semireal
+- title: unreal
+  url: /unreal
+- title: authors
+  url: /authors
+---

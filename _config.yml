@@ -1,0 +1,4 @@
+theme: minima
+collections:
+  articles:
+    collections_dir: articles

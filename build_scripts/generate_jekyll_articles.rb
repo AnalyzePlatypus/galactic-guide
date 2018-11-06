@@ -12,9 +12,9 @@ SCRIPT_VERSION = "0.0.1"
 
 
 HTML_ARTICLE_DIRECTORY = "recovered_content/articles"
-IGNORE_LIST_FILE_PATH = "data/article_ignore_list.txt"
+IGNORE_LIST_FILE_PATH = "build_scripts/data/article_ignore_list.txt"
 
-MARKDOWN_FILE_OUTPUT_DIRECTORY = "_posts"
+MARKDOWN_FILE_OUTPUT_DIRECTORY = "articles"
 
 # Helpers
 

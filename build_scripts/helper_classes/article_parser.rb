@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'nokogiri'
+require 'htmlentities'
 
 require_relative 'article_sanitizer.rb'
 
@@ -57,6 +58,7 @@ SELECTORS = [
 
 
 class ArticleParser
+
   def self.parse html
     @doc = Nokogiri::HTML(html)
 
@@ -71,10 +73,12 @@ class ArticleParser
   private
 
   def self.parse_selectors
+    @coder = HTMLEntities.new
     article = {}
     SELECTORS.each do |field|
       value = @doc.css(field[:selector]).text
-      article[field[:title]] = value
+      value.gsub! "\\\"", "\"" # Unescape quotes (because we'll be encoding them as HTML entities (i.e. `&quot;`) on the next line)
+      article[field[:title]] = @coder.encode value # Encode all unsafe characters as HTML entities
     end
     article
   end

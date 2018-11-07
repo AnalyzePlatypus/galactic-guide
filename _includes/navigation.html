@@ -1,10 +1,11 @@
-<nav>
-  <a href="/" class="logo link">
-    <img src="assets/images/logo-desktop-dark.png" class="logo desktop">
+<nav class="main-header">
+  <a href="/" class="">
+    <!-- <img src="#" class=""> -->
+    <h1>PGG</h1>
   </a>
   
-  <div class="nav-links desktop">
-    <ul>
+  <div id="desktop-nav">
+    <ul class="nav-link-list">
         {% for item in site.data.navigation %}
         <li>
             <a href="{{ item.url }}"
@@ -15,7 +16,7 @@
             >
             {{ item.title}}
             </a>
-          <!-- <div class="delimiter">/</div> -->
+          
         </li>
         {% endfor %}
     </ul>

@@ -7,6 +7,9 @@ collections:
     output: true
     collections_dir: articles
 
+sass:
+  sass_dir: _sass
+
 defaults:
   # _posts
   - scope:

@@ -1,0 +1,47 @@
+@import 'minima';
+
+.article {
+
+  
+}
+
+.article--header {
+  margin-bottom: $spacing-unit / 2;
+  border-bottom: 1px solid $brand-color;
+}
+
+.article--title {
+  
+}
+
+.article--title:hover::after {
+  content: '📎';
+}
+
+.article--subtitle {
+  font-size: 18px;
+  font-style: italic;
+}
+
+.article--date {
+
+}
+
+.article--metadata {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0px 0px 15px 0px;
+}
+
+.article--metadata h3 {
+  margin-bottom: 5px;
+}
+
+@media screen and (max-width: 500px) {
+  .article--metadata {
+    flex-direction: column;
+    justify-content: center;
+  }
+}

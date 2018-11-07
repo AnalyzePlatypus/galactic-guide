@@ -1,0 +1,29 @@
+---
+layout: list
+title: Unreal Topics
+---
+<section>
+    <div>
+      <h1>{{page.title}}</h1>
+    </div>
+</section>
+
+<ul class="article-list--wrapper">
+  
+  {% for article in site.articles%}
+    <li class="article-list--item">
+      <a href="{{ article.permalink }}">
+          <h2 class="article-list--item-title">{{ article.title }}</h2>
+      </a>
+      <div class="article-list--item-metadata">
+        <h3 class="article-list--item-subtitle">{{ article.subtitle }}</h3>
+        <div class="article-list--item-metadata">
+          <h4>
+            Factuality: 
+            <a href="/{{article.factuality | downcase}}" class="factuality-badge factuality-badge--{{article.factuality | downcase}}">{{ article.factuality }}</a>
+          </h4>
+        </div>
+      </div>
+    </li>
+  {% endfor %}
+</ul>

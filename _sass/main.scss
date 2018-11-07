@@ -1,85 +1,87 @@
+@import 'normalize.css';
 @import 'fonts.scss';
 @import 'colors.scss';
 @import 'animations.scss';
 @import 'dropdown.scss';
+@import 'nav.scss';
+@import 'minima.scss';
+@import 'article.scss';
+@import 'badges.scss';
+@import 'article-list.scss';
 
 // * {
 //   border: 1px solid red !important;
 // }
 
 html, body {
-  margin: 0px;
+  margin: 0px; 
 }
 
-nav {
-  height: 78px;
+.hero {
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: $font-size--hero;
+}
+
+a.standalone-link {
+  position: relative;
+}
+
+a.standalone-link:hover {
+  text-decoration: none;
+}
+
+a.standalone-link:hover::after {
+  content: ' ›';
+  position: absolute;
+  right: -10px;
+}
+
+.page-wrapper {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  box-shadow: 1px 0px 3px black;
-  padding: 11px 24px 11px 24px;
+  background-color: lightblue;
 }
 
-.logo.desktop {
-  height: 78px;
-  width: 223px;
-  padding-top: 6px;
-  transition: $transition-standard;
+.page-content {
+  width: 600px;
+  background-color: white;
+  border-radius: 25px;
+  padding: 30px 30px 0px 30px;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.363);
 }
 
-.logo.desktop:hover{
-  transform: scale(1) rotate(-2deg) translateX(-10px);
+// Small phones
+@media screen and (max-width: 320px) {
+  .page-content {
+    margin: 5px 10px 5px 10px;
+  }
 }
 
-.logo.link {
-  text-decoration: none;
-}
-
-.nav-links {
-  display: inline-block;
-  margin: 0px 50px;
-  padding-left: 0px;
-}
-
-.nav-links>ul {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  list-style-type: none;
-  padding-left: 0px;
-}
-
-.nav-link {
-  display: flex;
-  flex-wrap: nowrap;
-  color: $secondary-color;
-  font-size: $nav-link-font-size;
-  font-weight: 400;
-  font-style: normal;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 20px 2px 20px 2px;
-  // background: green;
-}
-
-.nav-link::after {
-  content: '/';
-  color: $primary-color__faded;
-  font-size: $nav-link-font-size;
-  font-weight: 400;
-  margin: 0px 2px;
-}
-
-.nav-link:hover {
-  color: $primary-color;
-}
-.nav-link:visited {
+// Medium & Large phones
+@media screen and (min-width: 639px) {
 
 }
 
-.nav-link.current {
-  color: black;
+// Tablets
+@media screen and (min-width: 800px) {
+  .page-content {
+    width: 100%;
+    margin: 0px 30px 0px 30px;
+  }
+}
+
+// Medium desktop
+@media screen and (min-width: 1024px) {
+  .page-content {
+    max-width: 700px;
+  }
+}
+
+// Largest desktop
+@media screen and (min-width: 1225px) {
+  
 }

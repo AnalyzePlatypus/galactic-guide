@@ -1,8 +1,10 @@
 ---
 - title: home
   url: /
-- title: all
+- title: all articles
   url: /all
+- title: real
+  url: /real
 - title: semireal
   url: /semireal
 - title: unreal

@@ -1,0 +1,15 @@
+{% if include.footnotes %}
+  <section id="footnotes">
+    <h2>Footnotes</h2>
+    <ul>
+      {% for footnote in include.footnotes %}
+      <li value="{{footnote.number}}">
+        <a href="#footnote-link.{{footnote.number}}" name="footnote-body.{{footnote.number}}">
+          {{footnote.number}}
+        </a>
+        {{footnote.text}}
+      </li>
+      {% endfor %}</li>
+    </ul>
+  </section>
+{% endif %}

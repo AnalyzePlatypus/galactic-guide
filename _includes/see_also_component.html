@@ -1,0 +1,14 @@
+{% if include.see_alsos %}
+  <section id="see-also">
+    <h2>See also</h2>
+    <ul>
+      {% for reference_id in include.see_alsos %}
+        <li>
+          <a href="{{reference_id}}">
+              {{ reference_id }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endif %}

@@ -1,0 +1,46 @@
+@import 'colors.scss';
+@import 'animations.scss';
+
+$real-color: rgb(185, 45, 45);
+$semireal-color: rgb(25, 97, 230);
+$unreal-color: rgb(54, 172, 113);
+$undetermined-color: gray;
+
+.factuality-badge {
+  color: white;
+  background-color: $undetermined-color;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 10px;
+  box-shadow: 0px 1px 3px rgba(77, 77, 77, 0.397);
+  padding: 3px 8px 3px 8px;
+  width: fit-content;
+  transition: $transition-standard;
+}
+
+.factuality-badge:visited {
+  color: white;
+}
+
+.factuality-badge:hover {
+  color: white;
+  text-decoration: none;
+  box-shadow: 0px 3px 10px rgba(66, 66, 66, 0.555);
+}
+
+.factuality-badge--real {
+  background-color: $real-color;
+  background-image: linear-gradient(lighten($real-color, 20%), $real-color);
+}
+
+.factuality-badge--semireal {
+  background-color: $semireal-color;
+  background-image: linear-gradient(lighten($semireal-color, 20%), $semireal-color);
+}
+
+.factuality-badge--unreal {
+  background-color: $unreal-color;
+  background-image: linear-gradient(lighten($unreal-color, 20%), $unreal-color);
+}

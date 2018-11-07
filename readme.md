@@ -12,13 +12,15 @@ So this is it! I haven't enough things to do already, so I'm going to try to rev
 
 Todo: 
 * Create article ID -> article title & link filter
-* Create 'factuality' (Real | SemiReal | UnReal) -> link filter
+* Create author name -> author page link
 * Custom 404 page
 * Activate the theme
 * Add the logo
 * Custom styling
 * Pagination for collection pages
+* How to sort the article lists
+* how to print the article count
+* How to render <pre> on mobile
 
 Pages:
 * Author page
-  

@@ -1,0 +1,28 @@
+@import 'colors.scss';
+
+.article-list--wrapper {
+  list-style: none;
+  margin: 0px;
+}
+
+.article-list--item {
+  border-bottom: 1px solid $divider-color;
+  padding: 5px 0px 5px 0px;
+}
+
+.article-list--item-title {
+  font-size: $font-size-large !important;
+  padding: 10px 0px 5px 0px !important;
+  margin: 0px !important;
+}
+
+.article-list--item-subtitle {
+  font-size: $font-size-medium;
+  font-style: italic;
+}
+
+.article-list--item-metadata {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

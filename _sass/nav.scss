@@ -1,0 +1,92 @@
+@import "minima";
+
+.main-header {
+  height: 78px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 1px 0px 3px black;
+  padding: 11px 24px 11px 24px;
+  background-color: lightblue;
+}
+
+.nav-link-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+}
+
+.logo.desktop {
+  height: 78px;
+  width: 223px;
+  padding-top: 6px;
+  transition: $transition-standard;
+}
+
+.logo.desktop:hover{
+  transform: scale(1) rotate(-2deg) translateX(-10px);
+}
+
+.logo.link {
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 0px 50px;
+  padding-left: 0px;
+}
+
+.nav-links>ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+.nav-link {
+  display: flex;
+  flex-wrap: nowrap;
+  color: $brand-color;
+  font-size: $nav-link-font-size;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 1px;
+  text-transform: lowercase;
+  text-decoration: none;
+  padding: 20px 2px 20px 2px;
+  // background: green;
+}
+
+.nav-link::after {
+  content: '/';
+  color: $primary-color__faded;
+  font-size: $nav-link-font-size;
+  font-weight: 400;
+  margin: 0px 2px;
+}
+
+.nav-link:hover {
+  color: $primary-color;
+}
+.nav-link:visited {
+
+}
+
+.nav-link.current {
+  color: black;
+}
+
+@media screen and (max-width: 600px) {
+  #desktop-nav {
+    display: none;
+  }
+}

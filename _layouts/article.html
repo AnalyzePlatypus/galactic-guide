@@ -9,55 +9,37 @@
   </head>
   <body>
     {% include navigation.html %}
-    <h1>
-      <a href="{{page.pgg_id}}">
-          {{ page.title }}
-      </a>
-    </h1>
-    <h2>{{ page.subtitle }}</h2>
-    <h3>by {{ page.author }}</h3>
-    <h3><small>{{ page.pgg_date }}</small></h3>
-    <div>
-      <div>{{ page.factuality }}</div>
+    <div class="page-wrapper">
+      <div class="page-content">
+        <section class="article--header">
+            <h1 class="article--title">
+              <a href="{{page.pgg_id}}">
+                  {{ page.title }}
+              </a>
+            </h1>
+            <h2 class="article--subtitle">{{ page.subtitle }}</h2>
+            <div class="article--metadata">
+              <h3>by 
+                <a href="authors/{{page.author | slugify}}" class="standalone-link">{{ page.author }}</a>
+              </h3>
+              <h3 class="article--date">{{ page.pgg_date }}</h3>
+              <div class="">
+                Factuality <a href="/{{page.factuality | downcase}}" class="factuality-badge factuality-badge--{{page.factuality | downcase}}">{{ page.factuality }}</a>
+              </div>
+            </div>
+        </section>
+      
+        <section class="article-body">
+          {{ content }}
+        </section>
+
+        <section class="article-footer">
+            {% include see_also_component.html see_alsos=page.see_also %}
+            {% include footnotes_component.html footnotes=page.footnotes %}
+            <h6>{{ page.submission_string }}</h6>
+        </section>
+      </div>
     </div>
-
-    <section>
-      {{ content }}
-    </section>
-
-    {% if page.see_also %}
-    <section id="see-also">
-      <h2>See also</h2>
-      <ul>
-        {% for reference_id in page.see_also %}
-          <li>
-            <a href="{{reference_id}}">
-                {{ reference_id }}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    </section>
-    {% endif %}
-
-    {% if page.footnotes %}
-    <section id="footnotes">
-      <h2>Footnotes</h2>
-      <ul>
-        {% for footnote in page.footnotes %}
-        <li value="{{footnote.number}}">
-          <a href="#footnote-link.{{footnote.number}}" name="footnote-body.{{footnote.number}}">
-            {{footnote.number}}
-          </a>
-          {{footnote.text}}
-        </li>
-        {% endfor %}</li>
-      </ul>
-    </section>
-    {% endif %}
-
-    <section>
-        <h6>{{ page.submission_string }}</h6>
-    </section>
+    {% include site_footer.html %}
   </body>
 </html>

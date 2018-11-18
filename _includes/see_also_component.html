@@ -4,8 +4,10 @@
     <ul>
       {% for reference_id in include.see_alsos %}
         <li>
+          {% assign reference_article = site.articles | where: "pgg_id", "1U1" %}
+          {% assign article_title = reference_article.title %}
           <a href="{{reference_id}}">
-              {{ reference_id }}
+              {{ reference_id | pgg_id_to_title }}
           </a>
         </li>
       {% endfor %}

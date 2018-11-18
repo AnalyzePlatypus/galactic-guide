@@ -11,7 +11,8 @@ title: Real Topics
 
 <ul class="article-list--wrapper">
   
-  {% for article in site.articles%}
+  {% assign sorted_articles = site.articles | sort: 'title' %}
+  {% for article in sorted_articles%}
     <li class="article-list--item">
       <a href="{{ article.permalink }}">
           <h2 class="article-list--item-title">{{ article.title }}</h2>

@@ -1,7 +1,7 @@
 module Jekyll
   module UrlSafe
-    safe true
-    priority :low
+    # safe true
+    # priority :low
 
     def url_safe input
       #URI.escape(input, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
